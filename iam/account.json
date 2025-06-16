@@ -6,7 +6,8 @@
       "Effect": "Allow",
       "Action": [
         "account:PutAccountName",
-        "account:GetAccountInformation"
+        "account:GetAccountInformation",
+        "account:PutContactInformation"
       ],
       "Resource": "*"
     }
