@@ -28,7 +28,9 @@ func readPolicy(policyPath string) (string, error) {
 }
 
 func loadDefaultAWSConfig(ctx context.Context) (aws.Config, error) {
-    cfg, err := config.LoadDefaultConfig(ctx)
+    cfg, err := config.LoadDefaultConfig(ctx,
+        config.WithSharedConfigProfile("test-dev-account"),
+    )
     if err != nil {
         return aws.Config{}, fmt.Errorf("failed to get default AWS config: %w", err)
     }
@@ -39,7 +41,7 @@ func assumeRole(ctx context.Context, cfg aws.Config, roleArn, policyStr string) 
     input := &sts.AssumeRoleInput{
         RoleArn:         aws.String(roleArn),
         RoleSessionName: aws.String("sts-session"),
-        DurationSeconds: aws.Int32(600),
+        DurationSeconds: aws.Int32(900),
         Policy:          aws.String(policyStr),
     }
 
