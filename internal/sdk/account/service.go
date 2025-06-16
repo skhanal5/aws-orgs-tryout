@@ -67,13 +67,12 @@ func PutContactInformation(ctx context.Context, accountId string) error {
 		City:         aws.String("Seattle"),
 		CountryCode:  aws.String("US"),
 		FullName:     aws.String("John Doe"),
-		PhoneNumber:  aws.String("+1-555-555-5555"),
+		PhoneNumber:  aws.String("+15555555555"),
 		PostalCode:   aws.String("98101"),
 		StateOrRegion: aws.String("WA"),
 	}
 
 	accountInfoInput := account.PutContactInformationInput{
-		AccountId: &accountId,
 		ContactInformation: contactInfo,
 	}
 
