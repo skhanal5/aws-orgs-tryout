@@ -29,7 +29,7 @@ func readPolicy(policyPath string) (string, error) {
 
 func loadDefaultAWSConfig(ctx context.Context) (aws.Config, error) {
     cfg, err := config.LoadDefaultConfig(ctx,
-        config.WithSharedConfigProfile("test-dev-account"),
+        config.WithSharedConfigProfile("prd-user"),
     )
     if err != nil {
         return aws.Config{}, fmt.Errorf("failed to get default AWS config: %w", err)
@@ -42,7 +42,7 @@ func assumeRole(ctx context.Context, cfg aws.Config, roleArn, policyStr string) 
         RoleArn:         aws.String(roleArn),
         RoleSessionName: aws.String("sts-session"),
         DurationSeconds: aws.Int32(900),
-        Policy:          aws.String(policyStr),
+        // Policy:          aws.String(policyStr),
     }
 
     resp, err := stsClient.AssumeRole(ctx, input)
@@ -88,7 +88,7 @@ func GetClient[T any](
         return empty, err
     }
 
-	roleArn := fmt.Sprintf(roleFormatSpec, accountId, "OrganizationAccountAccessRole")
+	roleArn := fmt.Sprintf(roleFormatSpec, accountId, "PrivilegedMemberRole")
 
     creds, err := assumeRole(ctx, cfg, roleArn, policyStr)
     if err != nil {

@@ -26,7 +26,7 @@ func GetAccountName(ctx context.Context, accountId string) (string, error) {
 	}
 
 	accountInfoInput := account.GetAccountInformationInput{
-		AccountId: &accountId,
+		AccountId: nil,
 	}
 
 	output, err := client.GetAccountInformation(ctx, &accountInfoInput)
