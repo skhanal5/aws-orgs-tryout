@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::{{MANAGEMENT_ACCOUNT_ID}}:user/{{IAM_USER_NAME}}",
+          "arn:aws:iam::{{MANAGEMENT_ACCOUNT_ID}}:role/{{ROLE_NAME}}"
+        ]
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
